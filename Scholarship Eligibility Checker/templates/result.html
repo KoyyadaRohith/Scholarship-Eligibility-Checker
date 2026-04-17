@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><title>{{ title }} Result</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header><h1>{{ title }}</h1>
+<nav><a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('reports') }}">Reports</a> | <a href="{{ url_for('download_csv') }}">Download CSV</a></nav></header>
+<main>
+<h2>Result</h2>
+<p><strong>{{ decision }}</strong></p>
+<table>
+<tr><th>Name</th><td>{{ data.name }}</td></tr>
+<tr><th>Roll No</th><td>{{ data.rollno }}</td></tr>
+<tr><th>College</th><td>{{ data.college }}</td></tr>
+<tr><th>Year</th><td>{{ data.year_of_study }}</td></tr>
+<tr><th>Branch</th><td>{{ data.branch }}</td></tr>
+<tr><th>Section</th><td>{{ data.section }}</td></tr>
+<tr><th>Percentage</th><td>{{ data.percentage }}</td></tr>
+<tr><th>Income</th><td>{{ data.income }}</td></tr>
+</table>
+<a href="{{ url_for('index') }}">Check Another</a>
+<a href="{{ url_for('reports') }}?branch={{ data.branch }}&section={{ data.section }}">View Section Report</a>
+</main>
+<footer>© {{ title }}</footer>
+</body>
+</html>

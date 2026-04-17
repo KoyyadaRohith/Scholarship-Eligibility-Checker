@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><title>{{ title }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header><h1>{{ title }}</h1>
+<nav><a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('reports') }}">Reports</a> | <a href="{{ url_for('download_csv') }}">Download CSV</a></nav></header>
+<main>
+<h2>Scholarship Form</h2>
+{% if errors %}<ul class="alert">{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+<form method="POST">
+<label>Name<input type="text" name="name" value="{{ prefill.name or '' }}" required></label>
+<label>Roll No<input type="text" name="rollno" value="{{ prefill.rollno or '' }}" required></label>
+<label>College<input type="text" name="college" value="{{ prefill.college or '' }}" required></label>
+<label>Year<input type="text" name="year_of_study" value="{{ prefill.year_of_study or '' }}"></label>
+<label>Branch<select name="branch">{% for b in branches %}<option value="{{b}}" {% if prefill.branch==b %}selected{% endif %}>{{b}}</option>{% endfor %}</select></label>
+<label>Section<select name="section">{% for s in sections %}<option value="{{s}}" {% if prefill.section==s %}selected{% endif %}>{{s}}</option>{% endfor %}</select></label>
+<label>Percentage<input type="number" name="percentage" value="{{ prefill.percentage or '' }}" required></label>
+<label>Annual Income<input type="number" name="income" value="{{ prefill.income or '' }}" required></label>
+<button type="submit">Check Eligibility</button>
+</form>
+</main>
+<footer>© {{ title }}</footer>
+</body>
+</html>

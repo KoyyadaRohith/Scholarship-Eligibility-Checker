@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><title>{{ title }} Reports</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header><h1>{{ title }}</h1>
+<nav><a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('reports') }}">Reports</a> | <a href="{{ url_for('download_csv') }}">Download CSV</a></nav></header>
+<main>
+<h2>Eligible Students Report</h2>
+<form method="GET">
+Branch<select name="branch">{% for b in branches %}<option value="{{b}}" {% if current_branch==b %}selected{% endif %}>{{b}}</option>{% endfor %}</select>
+Section<select name="section">{% for s in sections %}<option value="{{s}}" {% if current_section==s %}selected{% endif %}>{{s}}</option>{% endfor %}</select>
+<button type="submit">Show</button>
+</form>
+{% if rows %}<table border="1"><tr><th>#</th><th>Name</th><th>Roll No</th><th>College</th><th>Year</th><th>Branch</th><th>Section</th><th>Percentage</th><th>Income</th></tr>{% for r in rows %}<tr><td>{{ loop.index }}</td><td>{{ r["Name"] }}</td><td>{{ r["Roll No"] }}</td><td>{{ r["College"] }}</td><td>{{ r["Year of Study"] }}</td><td>{{ r["Branch"] }}</td><td>{{ r["Section"] }}</td><td>{{ r["Percentage"] }}</td><td>{{ r["Income (INR)"] }}</td></tr>{% endfor %}</table>{% else %}<p>No eligible students yet.</p>{% endif %}
+</main>
+<footer>© {{ title }}</footer>
+</body>
+</html>
